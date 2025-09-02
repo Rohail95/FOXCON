@@ -1,0 +1,75 @@
+﻿@model DatabaseLayer.Models.Order
+@{
+    ViewData["Title"] = "Order Details";
+    var statuses = new List<string> { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">Order #@Model.OrderId Information</h3></div>
+            <div class="card-body">
+                <p><strong>Order Date:</strong> @Model.OrderDate.ToString("f")</p>
+                <p><strong>Total Amount:</strong> Rs @Model.TotalAmount.ToString("N2")</p>
+                <p><strong>Customer Name:</strong> @(Model.Customer?.FirstName ?? "N/A") @(Model.Customer?.LastName)</p>
+                <p><strong>Shipping Address:</strong> @(Model.Customer?.Address ?? "N/A")</p>
+                <p><strong>Status:</strong> @Model.Status</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header"><h3 class="card-title">Update Status</h3></div>
+            <div class="card-body">
+                <form asp-action="UpdateStatus" method="post">
+                    <input type="hidden" name="orderId" value="@Model.OrderId" />
+                    <div class="input-group">
+                        <select name="status" class="form-control">
+                            @foreach (var status in statuses)
+                            {
+                                <option value="@status" selected="@(Model.Status == status)">@status</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">Products in this Order</h3></div>
+            <div class="card-body p-0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Image</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Product?.ImageUrl))
+                                    {
+                                        <img src="@item.Product.ImageUrl" alt="@item.Product.Name" style="width: 60px; height: auto; border-radius: 5px;" />
+                                    }
+                                </td>
+                                <td>@(item.Product?.Name ?? "Product not found")</td>
+                                <td>@item.Quantity</td>
+                                <td>Rs @item.UnitPrice.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to Order List</a>
+</div>

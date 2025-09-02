@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using DatabaseLayer.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li>
+        <a class="dropdown-item" asp-area="" asp-controller="ManageAccount" asp-action="Index">
+            <i class="fas fa-user-cog me-2"></i> My Profile
+        </a>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+        <form method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Products", new { area = "" })">
+            <button type="submit" class="dropdown-item">
+                <i class="fas fa-sign-out-alt me-2"></i> Logout
+            </button>
+        </form>
+    </li>
+}
+else
+{
+    <!-- THIS IS THE SIMPLIFIED LOGGED-OUT VIEW -->
+    <li>
+        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">
+            <i class="fas fa-sign-in-alt me-2"></i> Login
+        </a>
+    </li>
+}

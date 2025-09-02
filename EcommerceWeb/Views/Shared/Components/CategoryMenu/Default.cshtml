@@ -1,0 +1,19 @@
+﻿@model IEnumerable<DatabaseLayer.Models.Category>
+
+<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-tags fa-fw me-2"></i> Categories
+</a>
+
+<div class="dropdown-menu">
+    @foreach (var category in Model.OrderBy(c => c.Name))
+    {
+        <a class="dropdown-item" asp-controller="Products" asp-action="Index"
+           asp-route-category="@category.Name">@category.Name</a>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="dropdown-divider"></div>
+    }
+    <a class="dropdown-item" asp-controller="Products" asp-action="Index">View All Products</a>
+</div>

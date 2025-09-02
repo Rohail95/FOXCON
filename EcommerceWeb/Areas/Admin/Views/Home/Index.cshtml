@@ -1,0 +1,147 @@
+﻿@model EcommerceWeb.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@Model.TotalProducts</h3>
+                    <p>Total Products</p>
+                </div>
+                <div class="icon"><i class="ion ion-bag"></i></div>
+                <a href="/Admin/Products" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@Model.TotalCategories</h3>
+                    <p>Total Categories</p>
+                </div>
+                <div class="icon"><i class="ion ion-stats-bars"></i></div>
+                <a href="/Admin/Categories" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-secondary">
+                <div class="inner">
+                    <h3>@Model.TotalStockQuantity</h3>
+                    <p>Total Items in Stock</p>
+                </div>
+                <div class="icon"><i class="ion ion-ios-pie"></i></div>
+                <a href="/Admin/Products" class="small-box-footer">View Products <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>@Model.LowStockProductsCount</h3>
+                    <p>Low Stock Items</p>
+                </div>
+                <div class="icon"><i class="ion ion-alert-circled"></i></div>
+                <a href="#low-stock-table" class="small-box-footer">View Items <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3>@Model.TotalCustomers</h3>
+                    <p>Total Customers</p>
+                </div>
+                <div class="icon"><i class="ion ion-ios-people"></i></div>
+                <a asp-area="Admin" asp-controller="Customers" asp-action="Index" class="small-box-footer">View Customers <i class="fas fa-arrow-circle-right"></i></a> <!-- Link this later -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box" style="background-color: #6f42c1; color: white;">
+                <div class="inner">
+                    <h3>@Model.NewCustomersLast30Days</h3>
+                    <p>New Customers (30 Days)</p>
+                </div>
+                <div class="icon"><i class="ion ion-person-add"></i></div>
+                <a asp-area="Admin" asp-controller="Customers" asp-action="Index" class="small-box-footer">View Customers <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box" style="background-color: #17a2b8; color: white;">
+                <!-- Teal Color -->
+                <div class="inner">
+                    <h3>Rs @Model.TotalRevenue.ToString("N2")</h3>
+                    <p>Total Revenue</p>
+                </div>
+                <div class="icon"><i class="ion ion-cash"></i></div>
+                <a href="/Admin/Orders" class="small-box-footer">View Orders <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box" style="background-color: #fd7e14; color: white;">
+               
+                <div class="inner">
+                    <h3>Rs @Model.AverageOrderValue.ToString("N2")</h3>
+                    <p>Average Order Value</p>
+                </div>
+                <div class="icon"><i class="ion ion-calculator"></i></div>
+                <a href="/Admin/Orders" class="small-box-footer">View Orders <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+       
+    </div>
+
+   
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card" id="low-stock-table">
+                <div class="card-header border-transparent">
+                    <h3 class="card-title">Items Requiring Attention (Low Stock)</h3>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Stock Left</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.LowStockProducts != null && Model.LowStockProducts.Any())
+                                {
+                                    @foreach (var item in Model.LowStockProducts)
+                                    {
+                                        <tr>
+                                            <td><img src="@item.ImageUrl" alt="@item.Name" height="50" style="object-fit: contain;" /></td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Category?.Name</td>
+                                            <td>
+                                                <span class="badge badge-danger">@item.StockQuantity</span>
+                                            </td>
+                                            <td>
+                                                <a href="/Admin/Products/Edit/@item.ProductId" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-pencil-alt"></i> Restock
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center">No low stock items. Good job!</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

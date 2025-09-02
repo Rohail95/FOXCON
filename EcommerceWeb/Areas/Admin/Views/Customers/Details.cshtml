@@ -1,0 +1,100 @@
+﻿@model DatabaseLayer.Models.Customer
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<div class="row">
+    <!-- Left Column: Customer Info -->
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Customer Information</h3>
+            </div>
+            <div class="card-body">
+                <h4>@Model.FirstName @Model.LastName</h4>
+                <p class="text-muted">Customer ID: #@Model.CustomerId</p>
+                <hr />
+
+                <strong><i class="fas fa-envelope me-1"></i> Email</strong>
+                <p class="text-muted">@Model.Email</p>
+
+                <strong><i class="fas fa-phone me-1"></i> Phone</strong>
+                <p class="text-muted">
+                    @(string.IsNullOrEmpty(Model.Phone) ? "Not Provided" : Model.Phone)
+                </p>
+
+                <!-- This is the corrected 'smart address' block -->
+                <strong><i class="fas fa-map-marker-alt me-1"></i> Address</strong>
+                <p class="text-muted">
+                    @{
+                        var addressParts = new List<string?>();
+                        addressParts.Add(Model.Address);
+                        addressParts.Add(Model.City);
+                        addressParts.Add(Model.PostalCode);
+                        addressParts.Add(Model.Country);
+
+                        var fullAddress = string.Join(", ", addressParts.Where(s => !string.IsNullOrEmpty(s)));
+                    }
+                    @(string.IsNullOrEmpty(fullAddress) ? "Not Provided" : fullAddress)
+                </p>
+
+                <strong><i class="fas fa-calendar-alt me-1"></i> Joined</strong>
+                <p class="text-muted">@Model.CreatedAt?.ToString("dd MMMM yyyy")</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Order History -->
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Order History (@Model.Orders.Count)</h3>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.Orders.Any())
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr><th>Order ID</th><th>Date</th><th>Total</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Orders.OrderByDescending(o => o.OrderDate))
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId">#@order.OrderId</a>
+                                    </td>
+                                    <td>@order.OrderDate.ToShortDateString()</td>
+                                    <td>Rs @order.TotalAmount.ToString("N2")</td>
+                                    <td>
+                                        <!-- This is the fully corrected, clean switch statement -->
+                                        @{
+                                            var badgeClass = order.Status switch
+                                            {
+                                                "Pending" => "bg-warning",
+                                                "Processing" => "bg-info",
+                                                "Shipped" => "bg-primary",
+                                                "Delivered" => "bg-success",
+                                                "Cancelled" => "bg-danger",
+                                                _ => "bg-secondary"
+                                            };
+                                        }
+                                        <span class="badge @badgeClass">@order.Status</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-center p-3">This customer has not placed any orders yet.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<a asp-action="Index" class="btn btn-secondary">
+    <i class="fas fa-arrow-left me-1"></i> Back to Customer List
+</a>

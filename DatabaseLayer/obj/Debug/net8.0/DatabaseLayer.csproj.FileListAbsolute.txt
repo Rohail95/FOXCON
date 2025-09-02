@@ -1,0 +1,14 @@
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\bin\Debug\net8.0\DatabaseLayer.deps.json
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\bin\Debug\net8.0\DatabaseLayer.runtimeconfig.json
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\bin\Debug\net8.0\DatabaseLayer.dll
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\bin\Debug\net8.0\DatabaseLayer.pdb
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.csproj.AssemblyReference.cache
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.AssemblyInfoInputs.cache
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.AssemblyInfo.cs
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.csproj.CoreCompileInputs.cache
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.dll
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\refint\DatabaseLayer.dll
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.pdb
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\DatabaseLayer.genruntimeconfig.cache
+F:\EcommerceWeb\Application\Ecommerce\DatabaseLayer\obj\Debug\net8.0\ref\DatabaseLayer.dll

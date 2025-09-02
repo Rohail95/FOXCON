@@ -1,0 +1,66 @@
+﻿@model DatabaseLayer.Models.Cart
+@{
+    ViewData["Title"] = "Your Shopping Cart";
+}
+
+<div class="container my-4">
+    <h1 class="text-center mb-4">Your Shopping Cart</h1>
+
+    @if (Model != null && Model.CartItems.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">Product</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-end">Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="@item.Product?.ImageUrl" alt="@item.Product?.Name" style="width: 75px; height: 75px; object-fit: contain; margin-right: 15px;" />
+                                <div>
+                                    <h5>@item.Product?.Name</h5>
+                                    <small class="text-muted">@item.Product?.Category?.Name</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center align-middle">Rs @item.Product?.Price.ToString("N2")</td>
+                        <td class="text-center align-middle">@item.Quantity</td>
+                        <td class="text-end align-middle">Rs @((item.Product?.Price * item.Quantity)?.ToString("N2"))</td>
+                        <td class="text-center align-middle">
+                            <form asp-controller="Cart" asp-action="RemoveFromCart" method="post" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                                
+                                <input type="hidden" name="cartItemId" value="@item.CartItemId" />
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Grand Total:</strong></td>
+                    <td class="text-end font-weight-bold"><strong>Rs @Model.CartItems.Sum(item => item.Product.Price * item.Quantity).ToString("N2")</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="text-end mt-4">
+            <a asp-controller="Checkout" asp-action="Index" class="btn btn-success btn-lg">Proceed to Checkout</a>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <p>Your shopping cart is empty.</p>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    }
+</div>

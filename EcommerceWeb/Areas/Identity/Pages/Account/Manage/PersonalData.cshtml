@@ -1,0 +1,38 @@
+﻿@page
+@model EcommerceWeb.Areas.Identity.Pages.Account.Manage.PersonalDataModel
+@{
+    ViewData["Title"] = "Personal Data";
+}
+
+<!-- Apply our custom styling -->
+<link rel="stylesheet" href="~/css/identity.css" asp-append-version="true" />
+<body class="identity-page">
+</body>
+
+<div class="identity-container">
+    <h4>@ViewData["Title"]</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+            <p>
+                <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+            </p>
+            <div class="d-flex flex-column gap-2 mt-4">
+                <form id="download-data" asp-page="DownloadPersonalData" method="post">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Download My Data</button>
+                </form>
+                <p class="mt-2 mb-0">
+                    <a id="delete" asp-page="DeletePersonalData" class="w-100 btn btn-lg btn-danger">Delete My Account</a>
+                </p>
+            </div>
+            <div class="identity-links mt-3">
+                <a asp-page="./Index">Back to Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using DatabaseLayer.Models
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "/Views/Shared/_Layout.cshtml";
+    }
+}

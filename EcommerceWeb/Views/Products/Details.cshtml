@@ -1,0 +1,127 @@
+﻿@model EcommerceWeb.ViewModels.ProductViewModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Product Image Gallery -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="@Model.Product.ImageUrl" class="img-fluid rounded" alt="@Model.Product.Name">
+                </div>
+            </div>
+        </div>
+        <!-- Product Information & Actions -->
+        <div class="col-lg-6">
+            <span class="badge bg-primary mb-2">@Model.Product.Category?.Name</span>
+            <h1 class="display-5">@Model.Product.Name</h1>
+
+            <!-- Price Display -->
+            <div class="price-section my-3">
+                @if (Model.IsOnSale)
+                {
+                    <h2 class="text-danger font-weight-bold">
+                        Rs @Model.DisplayPrice.ToString("N2")
+                        <del class="text-muted fs-4 ms-2">Rs @Model.OriginalPrice?.ToString("N2")</del>
+                    </h2>
+                }
+                else
+                {
+                    <h2 class="font-weight-bold">Rs @Model.DisplayPrice.ToString("N2")</h2>
+                }
+            </div>
+
+            <p class="lead">@Model.Product.Description</p>
+            <hr class="my-4">
+
+            <!-- Add to Cart & Back Button -->
+            <div class="d-flex align-items-center gap-2">
+                <form asp-controller="Cart" asp-action="AddToCart" method="post" class="flex-grow-1">
+                    <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                    </button>
+                </form>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">Back to Shop</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- REVIEWS SECTION -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Customer Reviews</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Form for Logged-in Users -->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <h5>Leave a Review</h5>
+                        <form asp-controller="Reviews" asp-action="Add" method="post">
+                            <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+                            <div class="form-group mb-2">
+                                <label for="rating">Your Rating</label>
+                                <select name="rating" id="rating" class="form-control" required>
+                                    <option value="5">5 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="1">1 Star</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="comment">Your Review</label>
+                                <textarea name="comment" id="comment" rows="3" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p><a asp-area="Identity" asp-page="/Account/Login">Login</a> to leave a review.</p>
+                    }
+
+                    <hr />
+
+                
+                    @{
+                        var approvedReviews = Model.Product.Reviews.Where(r => r.Status == "Approved");
+                    }
+
+                    <h4>Approved Reviews (@approvedReviews.Count())</h4>
+
+                    @if (approvedReviews.Any())
+                    {
+                        foreach (var review in approvedReviews.OrderByDescending(r => r.ReviewDate))
+                        {
+                            <div class="d-flex mb-3 pt-3 border-top">
+                                <div class="flex-shrink-0"><i class="fas fa-user-circle fa-2x"></i></div>
+                                <div class="flex-grow-1 ms-3">
+                                    <strong>@(review.Customer?.FirstName ?? "Anonymous")</strong>
+                                    <p class="text-warning mb-1">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="fa-star @(i <= review.Rating ? "fas" : "far")"></i>
+                                        }
+                                    </p>
+                                    <p class="mb-1">@review.Comment</p>
+                                    <small class="text-muted">@review.ReviewDate?.ToString("dd MMMM, yyyy")</small>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>This product has no approved reviews yet. Be the first!</p>
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
