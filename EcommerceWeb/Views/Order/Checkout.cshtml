@@ -1,0 +1,139 @@
+﻿@model EcommerceWeb.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .checkout-container {
+        display: grid;
+        grid-template-columns: 1fr 0.8fr;
+        gap: 4em;
+    }
+
+    .main-content {
+        padding-right: 2em;
+        border-right: 1px solid #dee2e6;
+    }
+
+    .sidebar-content {
+        padding-left: 2em;
+    }
+
+    .payment-option {
+        border: 1px solid #ddd;
+        padding: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .payment-option:has(input:checked) {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 2px #0d6efd;
+        }
+
+    @@media (max-width: 992px) {
+        .checkout-container {
+            grid-template-columns: 1fr;
+        }
+
+        .main-content {
+            padding-right: 0;
+            border-right: 0;
+        }
+
+        .sidebar-content {
+            padding-left: 0;
+            order: -1;
+            margin-bottom: 2em;
+            background-color: #f8f9fa;
+            padding: 1.5em;
+            border-radius: 6px;
+        }
+    }
+</style>
+
+<div class="container my-5">
+    <div class="checkout-container">
+
+        <div class="main-content">
+            <h4 class="mb-3">FOXCON</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Cart" asp-action="Index">Cart</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Information</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5>Contact Information</h5>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <span>Already have an account? <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Checkout">Log in</a></span>
+                }
+            </div>
+
+            <form asp-controller="Checkout" asp-action="Index" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                    <label asp-for="Email"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <h5 class="mt-4">Shipping address</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3"><div class="form-floating"><input asp-for="FirstName" class="form-control" placeholder="First Name" /><label asp-for="FirstName"></label></div></div>
+                    <div class="col-md-6 mb-3"><div class="form-floating"><input asp-for="LastName" class="form-control" placeholder="Last Name" /><label asp-for="LastName"></label></div></div>
+                </div>
+                <div class="form-floating mb-3"><input asp-for="Address" class="form-control" placeholder="Address" /><label asp-for="Address"></label></div>
+                <div class="row">
+                    <div class="col-md-4 mb-3"><div class="form-floating"><input asp-for="City" class="form-control" placeholder="City" /><label asp-for="City"></label></div></div>
+                    <div class="col-md-4 mb-3"><div class="form-floating"><input asp-for="PostalCode" class="form-control" placeholder="Postal Code" /><label asp-for="PostalCode"></label></div></div>
+                    <div class="col-md-4 mb-3"><div class="form-floating"><input asp-for="Country" class="form-control" placeholder="Country" /><label asp-for="Country"></label></div></div>
+                </div>
+                <div class="form-floating mb-3"><input asp-for="Phone" class="form-control" placeholder="Phone" /><label asp-for="Phone"></label></div>
+
+                <hr />
+                <h5 class="mt-4">Payment</h5>
+                <p>All transactions are secure and encrypted.</p>
+
+                <div class="payment-option mb-2"><input type="radio" id="cod" name="PaymentMethod" value="Cash on Delivery" class="form-check-input" checked><label for="cod" class="ms-2">Cash on Delivery (COD)</label></div>
+                <div class="payment-option mb-2"><input type="radio" id="bank" name="PaymentMethod" value="Bank Transfer" class="form-check-input"><label for="bank" class="ms-2">Bank Transfer</label></div>
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Place Your Order</button>
+                </div>
+            </form>
+        </div>
+
+        <aside class="sidebar-content">
+            @if (Model.CartItems.Any())
+            {
+                foreach (var item in Model.CartItems)
+                {
+                    <div class="d-flex mb-3 align-items-center">
+                        <div class="flex-shrink-0"><img src="@(item.Product?.ImageUrl)" alt="@item.Product?.Name" style="width: 64px; height: 64px; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="flex-grow-1 ms-3"><strong>@item.Product?.Name</strong> (x @item.Quantity)</div>
+                        <div class="text-nowrap">Rs @((item.Product?.Price * item.Quantity)?.ToString("N2"))</div>
+                    </div>
+                }
+                <hr />
+                <form asp-controller="Checkout" asp-action="ApplyDiscount" method="post" class="d-flex gap-2">
+                    <input type="text" name="discountCode" class="form-control" placeholder="Discount code" />
+                    <button type="submit" class="btn btn-secondary">Apply</button>
+                </form>
+                <hr />
+                <div class="d-flex justify-content-between"><span>Subtotal</span><span>Rs @Model.CartTotal.ToString("N2")</span></div>
+                <div class="d-flex justify-content-between text-muted"><span>Shipping</span><span>Free</span></div>
+                <hr />
+                <div class="d-flex justify-content-between h5"><strong>Total</strong><strong>Rs @Model.CartTotal.ToString("N2")</strong></div>
+            }
+        </aside>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

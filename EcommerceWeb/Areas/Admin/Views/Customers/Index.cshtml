@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DatabaseLayer.Models.Customer>
+@{
+    ViewData["Title"] = "Manage Customers";
+}
+
+<div class="card">
+    <div class="card-header"><h3 class="card-title">All Registered Customers</h3></div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                    <th>Account Type</th>
+             
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.CustomerId</td>
+                        <td>@customer.FirstName @customer.LastName</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.Phone</td>
+                        <td>
+                            @if (string.IsNullOrEmpty(customer.UserId))
+                            {
+                                <span class="badge bg-secondary">Guest</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Registered</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@customer.CustomerId" class="btn btn-sm btn-info">View Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

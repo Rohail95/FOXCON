@@ -1,0 +1,90 @@
+﻿@model DatabaseLayer.Models.Cart
+@using DatabaseLayer.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Your Shopping Cart";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="text-center mb-4">Your Shopping Cart</h1>
+
+            @if (Model != null && Model.CartItems.Any())
+            {
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Product</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-end">Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                                            <img src="@item.Product?.ImageUrl" alt="@item.Product?.Name" style="width: 75px; height: 75px; object-fit: contain; margin-right: 15px;" />
+                                        </a>
+                                        <div>
+                                            <h5><a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">@item.Product?.Name</a></h5>
+                                            <small class="text-muted">@item.Product?.Category?.Name</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">Rs @item.Product?.Price.ToString("N2")</td>
+                                <td class="text-center" style="max-width: 150px;">
+                                    <form asp-controller="Cart" asp-action="UpdateQuantity" method="post">
+                                        <input type="hidden" name="cartItemId" value="@item.CartItemId" />
+                                        <div class="input-group">
+                                            <input type="number" name="quantity" class="form-control" value="@item.Quantity" min="1" onchange="this.form.submit()" />
+                                        </div>
+                                    </form>
+                                </td>
+                                <td class="text-end">Rs @((item.Product?.Price * item.Quantity)?.ToString("N2"))</td>
+                                <td class="text-center">
+                                    <form asp-controller="Cart" asp-action="RemoveFromCart" method="post">
+                                        <input type="hidden" name="cartItemId" value="@item.CartItemId" />
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Remove Item">&times;</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-end border-0"><strong>Grand Total:</strong></td>
+                            <td class="text-end border-0 fw-bold"><strong>Rs @Model.CartItems.Sum(item => (item.Product?.Price ?? 0) * item.Quantity).ToString("N2")</strong></td>
+                            <td class="border-0"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="text-end mt-4">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-controller="Checkout" asp-action="Index" class="btn btn-success btn-lg">Proceed to Checkout</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Checkout" asp-action="Index" class="btn btn-success btn-lg">Continue to Checkout</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <p class="lead">Your shopping cart is empty.</p>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-primary mt-3">Continue Shopping</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

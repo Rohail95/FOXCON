@@ -1,0 +1,150 @@
+wwwroot\admin-lte\css\adminlte.css
+wwwroot\admin-lte\css\adminlte.css.map
+wwwroot\admin-lte\css\adminlte.min.css
+wwwroot\admin-lte\css\adminlte.min.css.map
+wwwroot\admin-lte\css\adminlte.rtl.css
+wwwroot\admin-lte\css\adminlte.rtl.css.map
+wwwroot\admin-lte\css\adminlte.rtl.min.css
+wwwroot\admin-lte\css\adminlte.rtl.min.css.map
+wwwroot\admin-lte\js\adminlte.js
+wwwroot\admin-lte\js\adminlte.js.map
+wwwroot\admin-lte\js\adminlte.min.js
+wwwroot\admin-lte\js\adminlte.min.js.map
+wwwroot\css\identity.css
+wwwroot\css\site.css
+wwwroot\favicon.ico
+wwwroot\font-awesome\css\all.css
+wwwroot\font-awesome\css\all.min.css
+wwwroot\font-awesome\css\brands.css
+wwwroot\font-awesome\css\brands.min.css
+wwwroot\font-awesome\css\fontawesome.css
+wwwroot\font-awesome\css\fontawesome.min.css
+wwwroot\font-awesome\css\regular.css
+wwwroot\font-awesome\css\regular.min.css
+wwwroot\font-awesome\css\solid.css
+wwwroot\font-awesome\css\solid.min.css
+wwwroot\font-awesome\css\svg.css
+wwwroot\font-awesome\css\svg.min.css
+wwwroot\font-awesome\css\svg-with-js.css
+wwwroot\font-awesome\css\svg-with-js.min.css
+wwwroot\font-awesome\css\v4-font-face.css
+wwwroot\font-awesome\css\v4-font-face.min.css
+wwwroot\font-awesome\css\v4-shims.css
+wwwroot\font-awesome\css\v4-shims.min.css
+wwwroot\font-awesome\css\v5-font-face.css
+wwwroot\font-awesome\css\v5-font-face.min.css
+wwwroot\font-awesome\js\all.js
+wwwroot\font-awesome\js\all.min.js
+wwwroot\font-awesome\js\brands.js
+wwwroot\font-awesome\js\brands.min.js
+wwwroot\font-awesome\js\conflict-detection.js
+wwwroot\font-awesome\js\conflict-detection.min.js
+wwwroot\font-awesome\js\fontawesome.js
+wwwroot\font-awesome\js\fontawesome.min.js
+wwwroot\font-awesome\js\regular.js
+wwwroot\font-awesome\js\regular.min.js
+wwwroot\font-awesome\js\solid.js
+wwwroot\font-awesome\js\solid.min.js
+wwwroot\font-awesome\js\v4-shims.js
+wwwroot\font-awesome\js\v4-shims.min.js
+wwwroot\font-awesome\sprites\brands.svg
+wwwroot\font-awesome\sprites\regular.svg
+wwwroot\font-awesome\sprites\solid.svg
+wwwroot\font-awesome\webfonts\fa-brands-400.woff2
+wwwroot\font-awesome\webfonts\fa-regular-400.woff2
+wwwroot\font-awesome\webfonts\fa-solid-900.woff2
+wwwroot\font-awesome\webfonts\fa-v4compatibility.woff2
+wwwroot\images\banners\banner1.jpg
+wwwroot\images\banners\banner2.jpg
+wwwroot\images\banners\banner3.jpg
+wwwroot\images\banners\banner5.jpg
+wwwroot\images\banners\banner6.jpg
+wwwroot\images\banners\banner8.jpg
+wwwroot\images\default-avatar.jpg
+wwwroot\images\products\0ceb84a4-207d-4481-b2d4-fe18abab8c5f_LOGITECH KEYBOARD.jfif
+wwwroot\images\products\103ec196-56e1-4302-9f1c-281fea064c15_powerbank.jfif
+wwwroot\images\products\403124c9-c046-4ce4-b362-e0c7863e65ae_clock.jfif
+wwwroot\images\products\409dc6d9-dae3-4cbd-9f1f-a39d0021872d_EARBDS.jfif
+wwwroot\images\products\473dfac5-c467-4960-94f0-646b1df5fefc_pexels-kakakiky-31269805.jpg
+wwwroot\images\products\4d0824fd-a641-4b9e-be9a-c59f8d5e41ef_download.jfif
+wwwroot\images\products\51491fa4-d6a7-452d-beb0-ce0b4200fe66_flask bootele.jfif
+wwwroot\images\products\7b85481f-f1b3-4d49-9206-d2441ed871e2_download (2).jfif
+wwwroot\images\products\85f013bf-aa97-490f-bffb-aa73cb068234_pexels-kakakiky-31269805.jpg
+wwwroot\images\products\9066f54c-a0c2-4856-b0d0-14fbd8038f2a_download (5).jfif
+wwwroot\images\products\a252bb92-94dd-4083-a82a-a192112e2d14_hair dryer.jfif
+wwwroot\images\products\a6297f97-2862-4836-bf09-0ec42bd4a459_usb.jfif
+wwwroot\images\products\a75f0975-f50d-4732-beac-658309d8235c_body wash.jfif
+wwwroot\images\products\a824bd4c-b24b-41d0-b4e9-afced6b1e828_stopwatch.jfif
+wwwroot\images\products\a9303ce2-b6d8-437a-96d5-73360578f318_chess set.jfif
+wwwroot\images\products\ad85bf76-dd93-4be9-a3e3-b0769cd38040_download (4).jfif
+wwwroot\images\products\c3d72a19-04e4-4676-acd9-de7ac1f36727_download (3).jfif
+wwwroot\images\products\c849e8db-fafb-466c-b495-50427823aebe_tripod stand.png
+wwwroot\images\products\d1bca699-2446-45ac-b224-4817cc509dc2_teadybear.jfif
+wwwroot\images\products\e5d6ec1f-a4a5-44c4-ac55-d35737447519_download (1).jfif
+wwwroot\images\products\f787b1b2-d7fc-414e-971e-5a0240445af0_hair gel.jfif
+wwwroot\images\products\f8f1e9aa-aa67-4f9e-adb5-0d28e87ad990_pexels-zeleboba-33693665.jpg
+wwwroot\images\profiles\1ad9140a-2912-4d9d-af0e-598359702c91_mens pic 1.jfif
+wwwroot\images\profiles\90dae82a-9abd-453c-92f1-9a91b999f442_mens pic 1.jfif
+wwwroot\images\profiles\a2d27e00-a34a-4563-9eb4-e054066a061d_pic2.jfif
+wwwroot\js\site.js
+wwwroot\lib\bootstrap\dist\css\bootstrap.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min (1).css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min (2).css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\lib\bootstrap\js\bootstrap.bundle.min.js
+wwwroot\lib\bootstrap\js\bootstrap.min.js
+wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\jquery\dist\jquery.js
+wwwroot\lib\jquery\dist\jquery.min.js
+wwwroot\lib\jquery\dist\jquery.min.map
+wwwroot\lib\jquery\LICENSE.txt
+wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+wwwroot\lib\jquery-validation\LICENSE.md
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
+wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt

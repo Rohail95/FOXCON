@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DatabaseLayer.Models.Discount>
+@{
+    ViewData["Title"] = "Manage Discounts";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">All Discounts & Promotions</h3>
+        <div class="card-tools">
+            <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Create New Discount</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Usage</th>
+                    <th>Status</th>
+                    <th style="width: 150px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.Code</strong></td>
+                        <td>@item.DiscountType</td>
+
+                        <td>
+                            @if (item.DiscountType == "Percentage")
+                            {
+                                @(item.DiscountValue.ToString("0"))
+                        
+                                <text>%</text>
+                            }
+                            else
+                            {
+                                @Html.Raw("Rs ") @item.DiscountValue.ToString("N2")
+                            }
+                        </td>
+
+                        <td>@(item.CurrentUses ?? 0) / @(item.MaxUses?.ToString() ?? "Unlimited")</td>
+                        <td>
+                            @if (item.IsActive == true && item.EndDate >= DateTime.Today)
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Inactive/Expired</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.DiscountId" class="btn btn-sm btn-info"><i class="fas fa-edit"></i> Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.DiscountId" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>  

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DatabaseLayer.Models.Category>
+
+<!-- This is now a button that controls a collapsible area -->
+<a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#categoryCollapse" role="button">
+    <span>
+        
+        Categories
+    </span>
+    <!-- The icon that will be toggled -->
+    <i class="fas fa-plus"></i>
+</a>
+
+<!-- This is the collapsible area containing the category links -->
+<div class="collapse" id="categoryCollapse">
+    <div class="list-group list-group-flush ms-3">
+        @foreach (var category in Model.OrderBy(c => c.Name))
+        {
+            <a class="list-group-item list-group-item-action bg-primary text-white" asp-controller="Products" asp-action="Index" asp-route-category="@category.Name">
+                @category.Name
+            </a>
+        }
+        <a class="list-group-item list-group-item-action bg-primary text-white" asp-controller="Products" asp-action="Index">
+            View All Products
+        </a>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using DatabaseLayer.Models
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    if (Context.Request.Path.StartsWithSegments("/Admin"))
+    {
+        // If it's an admin-related action, use the Admin panel's layout.
+        Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+    else if (User.Identity.IsAuthenticated)
+    {
+        // If a REGULAR user is logged in and managing their account,
+        // use the main public-facing layout with the header and footer.
+        Layout = "/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        // For all other cases (like a GUEST on the Login or Register page),
+        // use our new, clean, header-less and footer-less layout.
+        Layout = "/Views/Shared/_IdentityLayout.cshtml";
+    }
+}

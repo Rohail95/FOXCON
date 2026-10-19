@@ -1,0 +1,91 @@
+﻿@model IEnumerable<DatabaseLayer.Models.Order>
+@{
+    ViewData["Title"] = "My Orders";
+    var activeStatus = ViewData["ActiveStatusFilter"] as string ?? "all";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4">My Order History</h1>
+
+    <ul class="nav nav-pills mb-4">
+        <li class="nav-item">
+            <a class="nav-link @(activeStatus == "all" ? "active" : "")"
+               asp-action="Index" asp-route-status="all">All Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(activeStatus == "toreview" ? "active" : "")"
+               asp-action="Index" asp-route-status="toreview">To Review</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(activeStatus == "completed" ? "active" : "")"
+               asp-action="Index" asp-route-status="completed">Completed</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(activeStatus == "returns" ? "active" : "")"
+               asp-action="Index" asp-route-status="returns">Returns</a>
+        </li>
+    </ul>
+
+    @if (Model.Any())
+    {
+        @foreach (var order in Model)
+        {
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between flex-wrap">
+                    <div>
+                        <strong>Order #@order.OrderId</strong>
+                        <br />
+                        <small class="text-muted">Placed on: @order.OrderDate.ToString("dd MMMM, yyyy")</small>
+                    </div>
+                    <div class="text-end">
+                        @{
+                            var badgeClass = order.Status.ToLower() switch
+                            {
+                                "pending" => "bg-warning text-dark",
+                                "processing" => "bg-info text-dark",
+                                "shipped" => "bg-primary",
+                                "delivered" => "bg-success",
+                                "cancelled" => "bg-danger",
+                                "returned" => "bg-dark",
+                                _ => "bg-secondary"
+                            };
+                        }
+                        <span class="badge @badgeClass">@order.Status</span><br />
+                        <strong>Total: Rs @order.TotalAmount.ToString("N2")</strong>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>Shipped To:</strong> @order.ShippingAddress</p>
+                    <hr />
+                    <h6 class="mb-3">Items:</h6>
+                    @foreach (var item in order.OrderDetails)
+                    {
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="@item.Product?.ImageUrl" alt="@item.Product?.Name" style="width: 60px; height: 60px; object-fit: contain; margin-right: 15px;" />
+                            <div>
+                                @item.Product?.Name (x @item.Quantity)
+                                <br />
+                                <small>Rs @item.UnitPrice.ToString("N2") each</small>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if (order.Status.Equals("Shipped", StringComparison.OrdinalIgnoreCase) || order.Status.Equals("Delivered", StringComparison.OrdinalIgnoreCase))
+                {
+                    <div class="card-footer text-end">
+                        <a asp-controller="Products" asp-action="Details" asp-route-id="@order.OrderDetails.FirstOrDefault()?.ProductId" class="btn btn-warning">
+                            <i class="fas fa-star me-1"></i> Write a Review
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center p-5 border rounded">
+            <p class="lead">You have no orders matching this status.</p>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-primary mt-3">Start Shopping</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var activePage = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body p-2">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a asp-action="Index" class="nav-link @(activePage == "Index" ? "active" : "")">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Email" class="nav-link @(activePage == "Email" ? "active" : "")">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="ChangePassword" class="nav-link @(activePage == "ChangePassword" ? "active" : "")">
+                            <i class="fas fa-key"></i> Password
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        @RenderBody()
+    </div>
+</div>
+
+@section Scripts {
+    @await RenderSectionAsync("Scripts", required: false)
+}
